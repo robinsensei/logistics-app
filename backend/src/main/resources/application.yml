@@ -6,7 +6,7 @@ spring:
   application:
     name: URBANSYNC
   jpa:
-    show-sql: true
+    show-sql: false # Disabled by default, can be enabled in dev profile
 
 urbansync:
   app:
@@ -15,3 +15,10 @@ urbansync:
 
 frontend:
   url: ${FRONTEND_URL:http://localhost:5173}
+
+# === LOGGING CONFIGURATION ===
+# Default logging level for all environments
+logging:
+  level:
+    root: INFO
+    org.hibernate: WARN

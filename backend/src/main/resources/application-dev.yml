@@ -7,6 +7,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update # Create/update schema on startup
+    show-sql: true # Show SQL queries in local development
 logging:
   level:
     root: INFO
+    org.springframework.web: DEBUG # More detailed web logging for dev
