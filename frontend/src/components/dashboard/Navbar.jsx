@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BellIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../../context/AuthContext';
-import { WebLogo } from '../../assets';
+import { WebLogo } from '../../assets/index.js';
 
 export default function Navbar() {
     const navigate = useNavigate();
