@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT:8080} # Railway provides the PORT env var
   forward-headers-strategy: framework # Important for running behind a proxy like Railway's
 
 spring:
@@ -7,6 +7,10 @@ spring:
     name: URBANSYNC
   jpa:
     show-sql: false # Disabled by default, can be enabled in dev profile
+    hibernate:
+      # Default ddl-auto. Can be overridden by profiles.
+      ddl-auto: update
+
 
 urbansync:
   app:

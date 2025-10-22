@@ -1,6 +1,6 @@
 Local development setup
 
-This project uses PostgreSQL. The application already has the following defaults in `src/main/resources/application.properties`:
+This project uses PostgreSQL for local development. The configuration is managed by Spring Profiles. The defaults for the `dev` profile are in `src/main/resources/application-dev.yml`:
 
 - spring.datasource.url=jdbc:postgresql://localhost:5432/logistics_db
 - spring.datasource.username=postgres

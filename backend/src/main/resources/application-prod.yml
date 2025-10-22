@@ -8,8 +8,7 @@ spring:
     hibernate:
       ddl-auto: validate # Safer for production, validates schema without changing it
     properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect # Correct key format
 logging:
   level:
     root: WARN # Reduce log noise in production
