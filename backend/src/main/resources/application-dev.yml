@@ -1,0 +1,12 @@
+# Configuration for local development (PostgreSQL via Docker)
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/logistics_db
+    username: postgres
+    password: akolangnakakaalam
+  jpa:
+    hibernate:
+      ddl-auto: update # Create/update schema on startup
+logging:
+  level:
+    root: INFO

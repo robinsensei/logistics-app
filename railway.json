@@ -9,7 +9,7 @@
         }
       },
       "buildCmd": "cd backend && ./mvnw -Dmaven.test.skip=true clean package",
-      "startCmd": "java -jar backend/target/*.jar -Dserver.port=$PORT"
+      "startCmd": "java -jar backend/target/*.jar -Dspring.profiles.active=prod"
     }
   }
 }

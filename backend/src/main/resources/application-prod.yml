@@ -1,0 +1,15 @@
+# Configuration for production (Railway)
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL} # Provided by Railway's PostgreSQL service
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate # Safer for production, validates schema without changing it
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    root: WARN # Reduce log noise in production

@@ -1,0 +1,17 @@
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework # Important for running behind a proxy like Railway's
+
+spring:
+  application:
+    name: URBANSYNC
+  jpa:
+    show-sql: true
+
+urbansync:
+  app:
+    jwtSecret: ${JWT_SECRET:c2VjcmV0S2V5Rm9yTG9naXN0aWNzU3lzdGVtSnNvbldlYlRva2VuQXV0aGVudGljYXRpb24=}
+    jwtExpirationMs: ${JWT_EXPIRATION_MS:86400000}
+
+frontend:
+  url: ${FRONTEND_URL:http://localhost:5173}
