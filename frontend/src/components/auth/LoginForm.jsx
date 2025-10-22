@@ -29,7 +29,7 @@ const LoginForm = () => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="w-full">
-        <h2 className="text-3xl font-bold text-blue-900 text-center mb-6">Login</h2>
+        <h2 className="text-3xl font-bold text-blue-900 text-center mb-6">LOGIN</h2>
         {error && <div className="error-message">{error}</div>}
         
         <div className="form-group">
