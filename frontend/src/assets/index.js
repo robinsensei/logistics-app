@@ -1,4 +1,4 @@
-import WebLogo from '/WebLogo.png';
+import WebLogo from './WebLogo.png';
 import BusPicture from '/buspicture.jpeg';
 import Noran from '/team/noran.png';
 import DeLaPena from '/team/Jansen.jpg';
