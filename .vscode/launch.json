@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "LogisticsBackendApplication",
+            "request": "launch",
+            "mainClass": "com.Logistics.LogisticsBackend.LogisticsBackendApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-LogisticsBackendApplication<LogisticsBackend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.Logistics.LogisticsBackend.LogisticsBackendApplication",
+            "projectName": "LogisticsBackend",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

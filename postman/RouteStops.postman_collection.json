@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "your-collection-id",
+		"name": "Logistics Route Stops API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"akolangnakakaalam\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/signin",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "auth", "signin"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Route Stops",
+			"item": [
+				{
+					"name": "Get All Stops for Route",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/routes/3/stops",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "routes", "3", "stops"]
+						}
+					}
+				},
+				{
+					"name": "Add Stop to Route",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stopId\": 2,\n    \"stopOrder\": 2,\n    \"arrivalTime\": \"09:00:00\",\n    \"departureTime\": \"09:15:00\",\n    \"distanceFromStartKm\": 5.2,\n    \"travelTimeFromPrevMin\": 45,\n    \"remarks\": \"Regular stop at Monumento\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/routes/3/stops",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "routes", "3", "stops"]
+						}
+					}
+				},
+				{
+					"name": "Update Route Stop",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stopId\": 2,\n    \"stopOrder\": 2,\n    \"arrivalTime\": \"09:30:00\",\n    \"departureTime\": \"09:45:00\",\n    \"distanceFromStartKm\": 5.2,\n    \"travelTimeFromPrevMin\": 45,\n    \"remarks\": \"Updated stop timing\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/routes/3/stops/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "routes", "3", "stops", "1"]
+						}
+					}
+				},
+				{
+					"name": "Delete Route Stop",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/routes/3/stops/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "routes", "3", "stops", "1"]
+						}
+					}
+				}
+			]
+		}
+	]
+}

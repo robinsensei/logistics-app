@@ -1,0 +1,161 @@
+BACKEND BUILD STEPS (NO CODE)
+________________________________________
+✅ Step 1: Project Setup
+1.	Create Spring Boot project using Spring Initializr or IntelliJ:
+o	Dependencies: Spring Web, Spring Data JPA, Spring Security, Spring Boot DevTools, MySQL Driver or PostgreSQL, Lombok
+2.	Setup application.yml:
+o	Configure database
+o	Configure JPA/Hibernate
+o	Enable CORS if needed
+________________________________________
+✅ Step 2: Define Project Structure
+Organize packages like this:
+css
+CopyEdit
+src/main/java/com/busfreeride/
+├── config/
+├── controller/
+├── dto/
+├── exception/
+├── model/
+├── repository/
+├── service/
+├── util/
+└── security/
+________________________________________
+✅ Step 3: Define Entity Models
+Create model/ classes for:
+•	User (with role)
+•	Bus
+•	Route
+•	Schedule
+•	RideLog
+•	QRCode (optional separate or part of User)
+Use JPA annotations to map these to DB tables.
+________________________________________
+✅ Step 4: Implement Database Layer
+In repository/, create interfaces:
+•	UserRepository
+•	BusRepository
+•	RouteRepository
+•	RideLogRepository
+Use JpaRepository<> for CRUD operations.
+________________________________________
+✅ Step 5: Set Up User Roles and Authentication
+1.	Create Role enum: ROLE_CLIENT, ROLE_DRIVER, etc.
+2.	Implement:
+o	Spring Security Config (WebSecurityConfigurerAdapter or new approach)
+o	JWT Token Generator & Validator (in security/)
+o	UserDetailsService and AuthenticationManager
+3.	Add role-based access control to endpoints.
+________________________________________
+✅ Step 6: Implement Services (Business Logic)
+In service/, create services:
+•	AuthService: Register/login
+•	UserService: CRUD + verification
+•	BusService: Assign driver/conductor
+•	RideService: QR scan log
+•	ScheduleService: Handle route & time
+________________________________________
+✅ Step 7: Expose REST API Controllers
+In controller/, create endpoints grouped by purpose:
+•	AuthController: /register, /login
+•	UserController: /me, /verify
+•	BusController: /buses, /assign
+•	RideController: /ride/log
+•	ScheduleController: /schedules, /routes
+Use DTOs in dto/ for input/output handling.
+________________________________________
+✅ Step 8: Add Utilities
+In util/, implement:
+•	QR Code Generator (ZXing or other lib)
+•	Time/date helpers
+•	File upload handler (if ID images are stored)
+________________________________________
+✅ Step 9: Error Handling
+In exception/, define:
+•	Custom exceptions (e.g. UserNotFoundException)
+•	GlobalExceptionHandler with @ControllerAdvice
+________________________________________
+✅ Step 10: Testing & Documentation
+•	Add Swagger/OpenAPI for documentation
+•	Add unit tests for services
+•	Add Postman collection for manual API testing
+
+
+
+
+
+Step 1: Create Role enum
+Use it in User to manage access levels
+•	Define values: ROLE_ADMIN, ROLE_STAFF, ROLE_CLIENT, ROLE_DRIVER, ROLE_CONDUCTOR
+________________________________________
+✅ Step 2: Create User entity
+Central entity; all actors use it with different roles
+•	Fields: id, name, email, password, role, contact_number, verified, etc.
+•	Add optional fields:
+o	employee_id (staff, driver, conductor)
+o	license_number (driver)
+o	id_type, id_number (client)
+•	Relate to: QRCode, assignedBus (later)
+________________________________________
+✅ Step 3: Create Bus entity
+Represents each vehicle in the fleet
+•	Fields: id, plate_number, capacity, status
+•	Relations:
+o	Assigned driver (User with ROLE_DRIVER)
+o	Assigned conductor (User with ROLE_CONDUCTOR)
+________________________________________
+✅ Step 4: Create Route entity
+Logical group of stops, used for scheduling buses
+•	Fields: id, route_name, start_point, end_point, stops, estimated_duration
+________________________________________
+✅ Step 5: Create Schedule entity
+Binds a Bus to a Route at a given time
+•	Fields: id, bus, route, departure_time, arrival_time, date
+•	May include recurrence (daily, weekends, etc.)
+________________________________________
+✅ Step 6: Create QRCode entity (optional as separate)
+Linked to clients; used for scanning
+•	Fields: id, qr_value, user_id, generated_at, status
+•	Optional: embed in User as string/byte array if simple
+________________________________________
+✅ Step 7: Create RideLog entity
+Tracks each ride for each passenger
+•	Fields: id, user_id, bus_id, timestamp, location_boarded, verified_by (staff or conductor)
+•	Useful for analytics, tracking and security
+
+
+
+Start with Stop
+Stops are the smallest unit — individual bus stations or pickup/drop points
+
+A Route is made up of multiple Stops
+
+A Schedule refers to the route + its sequence of stops
+
+2️⃣ Then Create Route
+A Route defines the path the bus will take (e.g., "Quezon City to Pasay")
+
+Has a list of ordered Stops
+
+Includes name, estimated duration, total distance
+
+3️⃣ Then Create Schedule
+A Schedule binds a specific Bus to a specific Route at a specific Time
+
+Includes departure_time, arrival_time, date
+
+Links a Bus, Route, and optionally Driver/Conductor
+
+
+🔍 You're comparing two different tables:
+Table	Represents
+✅ routes	The route itself (a defined path, like "Route 1 - Downtown Loop")
+✅ route_stops	The sequence of stops inside a specific route (e.g., Route 1 → Stop A → Stop B → Stop C)
+
+
+You are correct that you need a Route's ID to connect a stop to it, but the logic for creating
+a Stop itself has not changed. The key is to distinguish between creating a Stop and linking a Stop to a Route.
+http://localhost:8080/api/v1/routes/{route id}}/stops
+POST /api/v1/routes/{routeId}/stops/batch-add
