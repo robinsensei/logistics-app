@@ -3,7 +3,8 @@
   "build": {
     "builder": "NIXPACKS",
     "nixpacksConfig": {
-      "buildCmd": "cd backend && mvnw clean package -DskipTests",
+      "providers": ["java", "maven"],
+      "buildCmd": "cd backend && ./mvnw clean package -DskipTests",
       "startCmd": "java -jar backend/target/*.jar"
     }
   }
